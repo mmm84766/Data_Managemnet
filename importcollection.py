@@ -5,7 +5,7 @@ client = MongoClient('localhost', 27017)
 db = client['tnm']
 collection_currency = db['store']
 
-with open('currencies.json') as f:
+with open('store.json') as f:
     file_data = json.load(f)
 
 # if pymongo < 3.0, use insert()

@@ -5,7 +5,7 @@ import pymongo
 from pymongo import MongoClient
 
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
-mydb = client["testing"]
+mydb = client["tnm"]
 mycollection = mydb["store"]
 
 lat = input("Enter the latitude: ")

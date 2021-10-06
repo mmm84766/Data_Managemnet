@@ -1,25 +1,18 @@
 import json
-from pymongo import MongoClient 
-  
-  
-# Making Connection
-myclient = MongoClient("mongodb://localhost:27017/") 
-   
-# database 
-db = myclient["tnm"]
-   
-# Created or Switched to collection 
-# names: GeeksForGeeks
-Collection = db["store"]
-  
-# Loading or Opening the json file
-with open('store.json') as file:
-    file_data = json.load(file)
-      
-# Inserting the loaded data in the Collection
-# if JSON contains data more than one entry
-# insert_many is used else inser_one is used
-if isinstance(file_data, list):
-    Collection.insert_many(file_data)  
-else:
-    Collection.insert_one(file_data)
+from pymongo import MongoClient
+
+client = MongoClient('localhost', 27017)
+db = client['tnm']
+collection_currency = db['store']
+
+with open('currencies.json') as f:
+    file_data = json.load(f)
+
+# if pymongo < 3.0, use insert()
+collection_currency.insert(file_data)
+# if pymongo >= 3.0 use insert_one() for inserting one document
+collection_currency.insert_one(file_data)
+# if pymongo >= 3.0 use insert_many() for inserting many documents
+collection_currency.insert_many(file_data)
+
+client.close()
